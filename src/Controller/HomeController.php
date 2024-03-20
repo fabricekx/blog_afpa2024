@@ -43,11 +43,25 @@ class HomeController extends AbstractController
        Request $request,
        string $filter): Response
     {
+$articlesData = [];
+       foreach ( $articleRepository->findArticleByFilter($filter) as $article) {
+$articleData = [
+    'id' => $article->getId(),
+    'title' => $article->getTitle(),
+    'description' => $article->getDescription(),
+    'picture' => $article->getPicture(),
+    'date' => $article->getDate()->format('Y-m-d'),
+    'category_id' => $article->getCategory() ? $article->getCategory()->getId() : null,
+    'category_name' => $article->getCategory()  ? $article->getCategory()->getTitle() : null,
+]
+;
+$articlesData[]= $articleData;
 
-       $articles = $articleRepository->findArticleByFilter($filter);
+
+       };
 
         
-            return new JsonResponse($articles);
+            return new JsonResponse($articlesData);
        
     }
 

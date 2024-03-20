@@ -30,6 +30,7 @@
 
 			{% for article in articles %}
 				{# {{dump(article)}} #}
+				<div class="col-md-12" id="list-articles">
 				<a href="{{ path('app_article_show', {id : article.id })}}">
 					<div class="article d-flex p-3">
 
@@ -49,6 +50,7 @@
 						</div>
 					</div>
 				{% endfor %}
+				</div>
 
 				<div class="navigation">
 					{{ knp_pagination_render(articles) }}

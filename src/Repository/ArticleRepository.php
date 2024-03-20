@@ -66,8 +66,8 @@ class ArticleRepository extends ServiceEntityRepository
     {
 
         return $this->createQueryBuilder('a')
-            ->orderBy('a.date', 'filter')
-            ->setParameter('filter', $filter) // rappel dans la requete sql, les % permettent de remplacer des caratères
+            ->orderBy('a.date', $filter)
+            // ->setParameter('filter', $filter) // cette ligne aurait du permettre d'éviter d'avoir directement access aux requetes SQL pour éviter les risque de piratage de la bd
             ->getQuery()
             ->getResult()
         ;
