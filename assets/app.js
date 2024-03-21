@@ -49,7 +49,7 @@ $(document).ready(function () {
 
         for (let i = 0; i < data.length; i++) {
 
-          listArticles += "<a href='{{path('app_article_show', { id : " + data[i].id + " })}}'>" +
+          listArticles += "<a href='" + data[i].url + "'>" +
             "<div class='d-flex article p-3'>" +
 
             // "<img class='col-md-4' src='{{ asset('/uploads/articles/default.jpg') }}' alt='" + data[i].title + "' title='" + data[i].title + "'>" +

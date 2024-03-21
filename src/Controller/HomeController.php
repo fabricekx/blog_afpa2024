@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class HomeController extends AbstractController
 {
@@ -36,7 +37,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/{filter}', name: 'app_home_filter')]
+    #[Route('/filter/{filter}', name: 'app_home_filter')]   // il a fallu ajouter un /filter, sinon il y avait un conflit de route
     public function getArticleByFilter(ArticleRepository $articleRepository,
      CategoryRepository $categoryRepository,
       PaginatorInterface $paginator,
@@ -53,6 +54,7 @@ $articleData = [
     'date' => $article->getDate()->format('Y-m-d'),
     'category_id' => $article->getCategory() ? $article->getCategory()->getId() : null,
     'category_name' => $article->getCategory()  ? $article->getCategory()->getTitle() : null,
+    'url' => $this->generateUrl('app_article_show', ['id' => $article->getId()], UrlGeneratorInterface::ABSOLUTE_URL)
 ]
 ;
 $articlesData[]= $articleData;
